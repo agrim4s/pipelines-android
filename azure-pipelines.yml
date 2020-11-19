@@ -7,7 +7,8 @@ steps:
   inputs:
     workingDirectory: ''
     gradleWrapperFile: 'gradlew'
-    gradleOptions: '-Xmx3072m'
+    # gradleOptions: '-Xmx3072m'
+    gradleOpts: '-Xmx3072m'
     publishJUnitResults: true
     testResultsFiles: '**/TEST-*.xml'
     tasks: 'assembleDebug'
@@ -24,7 +25,7 @@ steps:
     repositoryName: 'agrim4s/pipelines-android'
     action: 'create'
     target: '$(Build.SourceVersion)'
-    tagSource: 'userSpecifiedTag'
+    tagSource: 'auto'
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
 - task: PublishBuildArtifacts@1
