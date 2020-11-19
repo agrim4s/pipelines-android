@@ -21,6 +21,15 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(build.artifactStagingDirectory)'
-    artifactName: 'drop'
+    artifactName: ''
     artifactType: 'container'
   displayName: Publish artifacts
+- task: GitHubRelease@1
+  inputs:
+    gitHubConnection: 'github'
+    repositoryName: 'agrim4s/pipelines-android'
+    action: 'create'
+    target: '$(Build.SourceVersion)'
+    tagSource: 'gitTag'
+    changeLogCompareToRelease: 'lastFullRelease'
+    changeLogType: 'commitBased'
