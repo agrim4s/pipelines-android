@@ -24,7 +24,7 @@ steps:
     repositoryName: 'agrim4s/pipelines-android'
     action: 'create'
     target: '$(Build.SourceVersion)'
-    tagSource: 'gitTag'
+    tagSource: ''
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
 - task: PublishBuildArtifacts@1
