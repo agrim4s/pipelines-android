@@ -22,7 +22,7 @@ steps:
 #     provProfileSecureFile: 'app.mobileprovision'
 #     removeProfile: true
 
-steps:
+# steps:
 - task: Xcode@5
   inputs:
     sdk: '$(sdk)'
