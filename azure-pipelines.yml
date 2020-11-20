@@ -8,9 +8,18 @@ variables:
   system.debug: true
 
 steps:
+
+
+- task: InstallAppleCertificate@2
+  inputs:
+    certSecureFile: 'appCertificate.p12'
+    certPwd: $(appCertificatePassword)
+    keychain: 'temp'
+    deleteCert: true
+  
 - task: InstallAppleProvisioningProfile@1
   inputs:
-    #provProfileSecureFile: 'app.mobileprovision'
+    provProfileSecureFile: 'app.mobileprovision'
     removeProfile: true
 
 - task: Xcode@5
