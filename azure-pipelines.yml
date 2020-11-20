@@ -1,8 +1,32 @@
 # https://docs.microsoft.com/azure/devops/pipelines/ecosystems/android
 pool:
   vmImage: 'macOS-10.14'
+variables:
+  scheme: ''
+  sdk: 'iphoneos'
+  configuration: 'Release'
+  system.debug: true
 
 steps:
+- task: InstallAppleProvisioningProfile@1
+  inputs:
+    provProfileSecureFile: 'app.mobileprovision'
+    removeProfile: true
+
+- task: Xcode@5
+  inputs:
+    actions: 'build'
+    scheme: '$(scheme)'
+    sdk: '$(sdk)'
+    configuration: '$(configuration)'
+    xcWorkspacePath: '**/*.xcodeproj/project.xcworkspace'
+    xcodeVersion: 'default'
+    signingOption: 'manual'
+    signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
+    provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'
+    packageApp: true
+    
+
 - task: Gradle@2
   inputs:
     workingDirectory: ''
@@ -28,9 +52,12 @@ steps:
     tagSource: userSpecifiedTag  
     tag: '$(Build.BuildNumber)'  
     title: '$(Build.BuildNumber)'  
-    assets: '**/*.apk'  
+    assets: '**/*.*p*'  
     changeLogCompareToRelease: lastNonDraftRelease  
     changeLogType: 'commitBased'
+
+
+
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(build.artifactStagingDirectory)'
