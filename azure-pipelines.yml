@@ -10,7 +10,7 @@ variables:
 steps:
 - task: InstallAppleProvisioningProfile@1
   inputs:
-    provProfileSecureFile: 'app.mobileprovision'
+    #provProfileSecureFile: 'app.mobileprovision'
     removeProfile: true
 
 - task: Xcode@5
