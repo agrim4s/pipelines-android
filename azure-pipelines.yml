@@ -50,7 +50,7 @@ steps:
     tagSource: userSpecifiedTag  
     tag: '$(Build.BuildNumber)'  
     title: '$(Build.BuildNumber)'  
-    assets: '**/*.*p*'  
+    assets: '**/*.apk'  
     changeLogCompareToRelease: lastNonDraftRelease  
     changeLogType: 'commitBased'
 
